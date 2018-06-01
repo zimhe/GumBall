@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33285693829338254}
   - component: {fileID: 136543447959085444}
   - component: {fileID: 23191457032581134}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: XY
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 33665631473758904}
   - component: {fileID: 136613470900015508}
   - component: {fileID: 23115483811264200}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: YZ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 33779033537542160}
   - component: {fileID: 65024372491223312}
   - component: {fileID: 23678229795198748}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Z Axis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,9 +73,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4968160969480612}
-  - component: {fileID: 114993466355952856}
   - component: {fileID: 114105619482701242}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GumBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +92,7 @@ GameObject:
   - component: {fileID: 33641060869837868}
   - component: {fileID: 65768271281160854}
   - component: {fileID: 23375848343048614}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: O
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +110,7 @@ GameObject:
   - component: {fileID: 33113096471478052}
   - component: {fileID: 65445508218507464}
   - component: {fileID: 23241436764201220}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: X Axis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +128,7 @@ GameObject:
   - component: {fileID: 33326221494777518}
   - component: {fileID: 65362357307556664}
   - component: {fileID: 23973780815193580}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Y Axis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +146,7 @@ GameObject:
   - component: {fileID: 33920005871867528}
   - component: {fileID: 136490589230064856}
   - component: {fileID: 23082727333726402}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: XZ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +251,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1464893526487492}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5326791, y: -0.86408997, z: 1.3660779}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4652902726405478}
@@ -612,24 +611,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnAxisColor: {r: 1, g: 1, b: 1, a: 1}
-  AxisX: {fileID: 4012631649866132}
-  AxisY: {fileID: 4652902726405478}
-  AxisZ: {fileID: 4125178598817060}
-  XZ: {fileID: 4740569867998642}
-  XY: {fileID: 4043021653836716}
-  YZ: {fileID: 4277722607102784}
---- !u!114 &114993466355952856
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1464893526487492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e7432311214d49499c5db0ab32403c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnAxisColor: {r: 1, g: 1, b: 1, a: 0}
   AxisX: {fileID: 4012631649866132}
   AxisY: {fileID: 4652902726405478}
   AxisZ: {fileID: 4125178598817060}

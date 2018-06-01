@@ -48,8 +48,6 @@ using UnityEngine;
             _camera = GetComponent<Camera>();
 
             gumBall.gameObject.SetActive(false);
-
-           
         }
 
 
@@ -58,20 +56,23 @@ using UnityEngine;
         /// </summary>
         void Update()
         {
-        
-            SelectionOperator();
 
+        SelectionOperator();
 
-           updateGumBall();
-
-
-
+        updateGumBall();
         }
 
         void updateGumBall()
         {
             
-            gumBall.transform.localScale = Mathf.Abs(transform.localPosition.z)*0.5f * GumballSize*Vector3.one;
+            gumBall.transform.localScale = Mathf.Abs(transform.localPosition.z) * GumballSize*Vector3.one;
+
+       
+
+        if (!SomethingOnRadius())
+        {
+            gumBall.resetColor();
+        }
         }
 
         void SelectionOperator()
@@ -105,8 +106,10 @@ using UnityEngine;
                 if (GumHit.transform.parent == gumBall.transform&&!OnAction)
                 {
                     gumBall.overAxis = GumHit.transform;
+                    gumBall.HIghlightAxis();
                 }
-            }
+        }
+       
 
             if (Input.GetMouseButton(0))
             {
@@ -144,18 +147,18 @@ using UnityEngine;
                     }
                     if (gumBall.overAxis.name == "XZ")
                     {
-                        px -= tv.x*0.5f;
-                        pz -= tv.z*0.5f;
+                        px -= tv.x;
+                        pz -= tv.z;
                     }
                     if (gumBall.overAxis.name == "XY")
                     {
-                        px -= tv.x*0.5f;
-                        py -= tv.y*0.5f;
+                        px -= tv.x;
+                        py -= tv.y;
                     }
                     if (gumBall.overAxis.name == "YZ")
                     {
-                        py -= tv.y*0.5f;
-                        pz -= tv.z*0.5f;
+                        py -= tv.y;
+                        pz -= tv.z;
                     }
 
                     _position +=new Vector3(px,py,pz);
@@ -178,14 +181,38 @@ using UnityEngine;
             if (Input.GetMouseButtonDown(0))
             {
 
-                var radius = Mathf.Abs(transform.localPosition.z) * GumballSize*0.5f;
+                var radius = Mathf.Abs(transform.localPosition.z) * GumballSize;
                
-                if (!Physics.SphereCast(ray,radius)&&!OnAction)
+                if (!SomethingOnRadius())
                 {
                     gumBall.Restore();
                     gumBall.gameObject.SetActive(false);
                 }
             }
         }
+
+
+
+    private bool SomethingOnRadius()
+    {
+        bool onRadius;
+
+        var ray = _camera.ScreenPointToRay(Input.mousePosition);
+
+        var radius = Mathf.Abs(transform.localPosition.z) * GumballSize;
+
+        if (!Physics.SphereCast(ray, radius) && !OnAction)
+        {
+
+            onRadius = false;
+        }
+        else
+        {
+            onRadius = true;
+        }
+
+
+            return onRadius;
+    }
     }
 

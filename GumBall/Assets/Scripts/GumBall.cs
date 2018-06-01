@@ -36,23 +36,35 @@ public class GumBall : MonoBehaviour
 	void Update ()
 	{
 		
-        Axises.ForEach(a=>
+      
+	}
+
+
+    public void HIghlightAxis()
+    {
+        Axises.ForEach(a =>
         {
-            if (overAxis == a)
+            if (overAxis != a)
             {
-                a.GetComponent<MeshRenderer>().material.color = OnAxisColor;
-            }
-            else
-            {
-                a.GetComponent<MeshRenderer>().material.color =DefColor[a];
+                a.GetComponent<MeshRenderer>().material.color = DefColor[a];
             }
         });
 
-	}
+
+        if (overAxis != null)
+        {
+            overAxis.GetComponent<MeshRenderer>().material.color = OnAxisColor;
+        }
+    }
 
     public void Restore()
     {
         overAxis = null;
+        Axises.ForEach(a => { a.GetComponent<MeshRenderer>().material.color = DefColor[a]; });
+    }
+
+    public void resetColor()
+    {
         Axises.ForEach(a => { a.GetComponent<MeshRenderer>().material.color = DefColor[a]; });
     }
 
