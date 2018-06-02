@@ -8,8 +8,10 @@ public abstract class SelectiveObject : MonoBehaviour
 
     private bool selected;
 
- 
+    private SelectionState State = SelectionState.Default;
 
+
+ 
 
 
     private void OnMouseEnter()
@@ -21,12 +23,16 @@ public abstract class SelectiveObject : MonoBehaviour
 
     private void OnMouseOver()
     {
+        if(State!=SelectionState.Selected)
         Highlight();
     }
 
     private void OnMouseExit()
     {
-        Restore();
+        if (State != SelectionState.Selected)
+            Restore();
+
+
         over = false;
     }
 
@@ -35,16 +41,32 @@ public abstract class SelectiveObject : MonoBehaviour
         return over;
     }
 
-    public bool IsSelected()
+    public enum SelectionState
     {
-        return selected;
+        Selected,
+        Default
     }
 
+    public void SetState(SelectionState _state)
+    {
+        State = _state;
+        switch (_state)
+        {
+            case SelectionState.Default:
+                Restore();
+                break;
+            case SelectionState.Selected:
+                Select();
+                break;
+        }
 
+    }
 
     public abstract void Highlight();
 
 
     public abstract void Restore();
+
+    public abstract void Select();
 
 }

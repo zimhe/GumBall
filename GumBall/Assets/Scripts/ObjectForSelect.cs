@@ -1,20 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// specify behaviors of objects on Highlighting and Selecting
+/// </summary>
 public class ObjectForSelect : SelectiveObject
 {
-    [SerializeField] private float HLScale = 0.6f;
-    [SerializeField] private float DFScale = 0.5f;
+  
+    [SerializeField] private Color HighlightColor;
+    [SerializeField] private Color SelectedColor;
+    [SerializeField] private Color DefaultColor;
 
+
+    private void Awake()
+    {
+        GetComponent<MeshRenderer>().material.renderQueue = 1980;
+    }
 
     public override void Highlight()
     {
-        transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one * HLScale, Time.deltaTime * 5f);
+        transform.GetComponent<MeshRenderer>().material.color = HighlightColor;
     }
 
     public override void Restore()
     {
-        transform.localScale = DFScale * Vector3.one;
+        transform.GetComponent<MeshRenderer>().material.color = DefaultColor;
+    }
+
+    public override void Select()
+    {
+        transform.GetComponent<MeshRenderer>().material.color = SelectedColor;
     }
 }
