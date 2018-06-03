@@ -43,7 +43,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 1126
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 521}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_MinSize: {x: 306, y: 442}
   m_MaxSize: {x: 8006, y: 8042}
   vertical: 1
-  controlID: 10
+  controlID: 52
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_MinSize: {x: 306, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 11
+  controlID: 53
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -444,9 +444,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 2.244629, y: -2.8299522, z: 2.1129527}
+    m_Target: {x: 343.09268, y: -96.47797, z: -212.89859}
     speed: 2
-    m_Value: {x: 2.244629, y: -2.8299522, z: 2.1129527}
+    m_Value: {x: 343.09268, y: -96.47797, z: -212.89859}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -470,13 +470,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.21397331, y: 0.77113396, z: -0.5011727, w: -0.32923234}
+    m_Target: {x: -0.07173041, y: 0.897724, z: -0.4044752, w: -0.1592045}
     speed: 2
-    m_Value: {x: -0.21397328, y: 0.77113384, z: -0.50117266, w: -0.3292323}
+    m_Value: {x: -0.07173042, y: 0.89772403, z: -0.40447524, w: -0.15920451}
   m_Size:
-    m_Target: 17.467081
+    m_Target: 896.6711
     speed: 2
-    m_Value: 17.467081
+    m_Value: 896.6711
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -571,9 +571,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: 9efbffff00000000
+    m_SelectedIDs: 20f1ffff
+    m_LastClickedID: -3808
+    m_ExpandedIDs: 20f1ffff9efbffff00000000ae280000d4280000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -635,18 +635,18 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Prefab
+    - Assets/Example
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Prefab
+  - Assets/Example
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\zim\Documents\GitHub\GumBall\GumBall
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 66280000
-    m_LastClickedID: 10342
+    m_SelectedIDs: 86280000
+    m_LastClickedID: 10374
     m_ExpandedIDs: 00000000ce270000402800004e28000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -702,7 +702,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 00000000b4270000b2500000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
