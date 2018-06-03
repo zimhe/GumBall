@@ -32,6 +32,8 @@ public class CamObjectSelector : MonoBehaviour
     private Transform Target;
 
     private Vector3 _position;
+    private Vector3 _scale;
+    private Quaternion _rotation;
 
 
     private bool OnAction;
@@ -62,8 +64,8 @@ public class CamObjectSelector : MonoBehaviour
 
     void updateGumBall()
     {
-
-        gumBall.transform.localScale = Mathf.Abs(transform.localPosition.z) * GumballSize * Vector3.one*0.1f;
+        var z = Mathf.Clamp(Mathf.Abs(transform.localPosition.z), 6f, 40f);
+        gumBall.transform.localScale = z * GumballSize * Vector3.one*0.1f;
 
 
 
@@ -88,6 +90,8 @@ public class CamObjectSelector : MonoBehaviour
                     {
                         Target.GetComponent<SelectiveObject>().SetState(SelectiveObject.SelectionState.Default);
                         Target = RcHit.transform;
+                        _scale = Target.localScale;
+                        _rotation = Target.rotation;
                     }
                     else
                     {
@@ -99,9 +103,10 @@ public class CamObjectSelector : MonoBehaviour
 
                     gumBall.gameObject.SetActive(true);
 
-                    gumBall.transform.position = Target.position;
-
-                    _position = gumBall.transform.position;
+                    gumBall.Localize(Target);
+                    _position = Target.position;
+                    _scale = Target.localScale;
+                    _rotation = Target.rotation;
                 }
             }
         }
@@ -141,21 +146,32 @@ public class CamObjectSelector : MonoBehaviour
                 float py = 0f;
                 float pz = 0f;
 
+                float sx = 0f;
+                float sy = 0f;
+                float sz = 0f;
+
+                float angles = 0f;
+
+                Vector3 Axis=Vector3.zero;
+                Vector3 Direction = Vector3.zero;
 
 
                 if (gumBall.overAxis.name == "X Axis")
                 {
                     px -= tv.x;
+                    Direction = gumBall.transform.TransformDirection(Vector3.right);
                 }
 
                 if (gumBall.overAxis.name == "Y Axis")
                 {
                     py -= tv.y;
+                    Direction = gumBall.transform.TransformDirection(Vector3.up);
                 }
 
                 if (gumBall.overAxis.name == "Z Axis")
                 {
                     pz -= tv.z;
+                    Direction = gumBall.transform.TransformDirection(Vector3.forward);
                 }
 
                 if (gumBall.overAxis.name == "XZ")
@@ -176,17 +192,72 @@ public class CamObjectSelector : MonoBehaviour
                     pz -= tv.z;
                 }
 
-                _position += new Vector3(px, py, pz);
+                if (gumBall.overAxis.name == "Scale X")
+                {
+                    sx += tv.x;
+                }
+                if (gumBall.overAxis.name == "Scale Y")
+                {
+                    sy += tv.y;
+                }
+                if (gumBall.overAxis.name == "Scale Z")
+                {
+                    sz += tv.z;
+                }
 
+                if (gumBall.overAxis.name == "O")
+                {
+                    float s = 0f;
+
+                    s+=tv.x-tv.y+tv.z;
+                    sx = sy = sz = s;
+                }
+
+                if (gumBall.overAxis.name == "Arc X")
+                {
+                    angles += dx;
+                    angles -= dy;
+                  
+                    Axis = gumBall.transform.TransformDirection(Vector3.right);
+                }
+                if (gumBall.overAxis.name == "Arc Y")
+                {
+                    angles += dx;
+                    angles -= dy;
+                    Axis = gumBall.transform.TransformDirection(Vector3.up);
+                }
+                if (gumBall.overAxis.name == "Arc Z")
+                {
+                    angles += dx;
+                    angles += dy;
+                    Axis = gumBall.transform.TransformDirection(Vector3.forward);
+                }
+
+                var p = Target.transform.TransformVector(px/Target.transform.localScale.x, py / Target.transform.localScale.y, pz / Target.transform.localScale.z);
+
+                _position += p;
+                _scale+=new Vector3(_scale.x*sx*0.3f,_scale.y*sy*0.3f,_scale.z*sz*0.3f);
+
+                
                 gumBall.transform.position =
                     Vector3.Lerp(gumBall.transform.position, _position, Time.deltaTime * _stiffness);
 
+                if (angles != 0f)
+                    gumBall.transform.RotateAround(gumBall.transform.position, Axis, angles*2f);
+                   
                 Target.position = gumBall.transform.position;
+                Target.rotation = gumBall.transform.rotation;
+
+                Target.localScale= Vector3.Lerp(Target.localScale, _scale, Time.deltaTime * _stiffness);
             }
         }
         else
         {
             _position = gumBall.transform.position;
+            _rotation = gumBall.transform.rotation;
+
+            if (Target != null)
+                _scale = Target.transform.localScale;
 
             OnAction = false;
 
@@ -217,11 +288,12 @@ public class CamObjectSelector : MonoBehaviour
 
         var ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-        var radius = Mathf.Abs(transform.localPosition.z) * GumballSize*0.1f;
+        var z = Mathf.Clamp(Mathf.Abs(transform.localPosition.z), 6f, 40f);
+
+        var radius = z * GumballSize*0.1f;
 
         if (!Physics.SphereCast(ray, radius) && !OnAction)
         {
-
             onRadius = false;
         }
         else
@@ -232,5 +304,23 @@ public class CamObjectSelector : MonoBehaviour
 
         return onRadius;
     }
+
+    float eulerValue(float _v)
+    {
+        float e = _v;
+
+        if (e > 180f)
+        {
+            e -= 360f;
+        }
+
+        if (e < -180f)
+        {
+            e += 360f;
+        }
+
+        return e;
+    }
+
 }
 

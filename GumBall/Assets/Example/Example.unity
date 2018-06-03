@@ -344,7 +344,7 @@ Transform:
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114105619482701242, guid: 6219e095822709c4da4ec1d60f526458,
     type: 2}
-  m_PrefabInternal: {fileID: 1020939278}
+  m_PrefabInternal: {fileID: 933883051}
   m_Script: {fileID: 11500000, guid: eb8d31fae07504e4cad1adaf83d06ee0, type: 3}
 --- !u!1 &839741085
 GameObject:
@@ -445,7 +445,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1020939278
+--- !u!1001 &933883051
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -651,7 +651,7 @@ MonoBehaviour:
   _sensitivity: 1
   _stiffness: 10
   gumBall: {fileID: 540605412}
-  GumballSize: 0.8
+  GumballSize: 0.6
 --- !u!114 &1341563080
 MonoBehaviour:
   m_ObjectHideFlags: 0
