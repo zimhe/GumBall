@@ -140,7 +140,9 @@ public class CamObjectSelector : MonoBehaviour
                     OnAction = true;
                 }
 
-                var tv = transform.TransformVector(dx, dy, 0f);
+                var v = transform.TransformVector(dx, dy, 0f);
+
+                var tv = Target.InverseTransformVector(v);
 
                 float px = 0f;
                 float py = 0f;
@@ -149,6 +151,7 @@ public class CamObjectSelector : MonoBehaviour
                 float sx = 0f;
                 float sy = 0f;
                 float sz = 0f;
+                float sa = 0f;
 
                 float angles = 0f;
 
@@ -194,15 +197,15 @@ public class CamObjectSelector : MonoBehaviour
 
                 if (gumBall.overAxis.name == "Scale X")
                 {
-                    sx += tv.x;
+                    sx += tv.x+tv.y+tv.z;
                 }
                 if (gumBall.overAxis.name == "Scale Y")
                 {
-                    sy += tv.y;
+                    sy += tv.x+tv.y+tv.z;
                 }
                 if (gumBall.overAxis.name == "Scale Z")
                 {
-                    sz += tv.z;
+                    sz += tv.x + tv.y + tv.z;
                 }
 
                 if (gumBall.overAxis.name == "O")
@@ -215,35 +218,39 @@ public class CamObjectSelector : MonoBehaviour
 
                 if (gumBall.overAxis.name == "Arc X")
                 {
-                    angles += dx;
-                    angles -= dy;
-                  
+
+                    angles += dx-dy;
+
                     Axis = gumBall.transform.TransformDirection(Vector3.right);
                 }
                 if (gumBall.overAxis.name == "Arc Y")
                 {
-                    angles += dx;
-                    angles -= dy;
+                    angles += dx-dy;
+                 
                     Axis = gumBall.transform.TransformDirection(Vector3.up);
                 }
                 if (gumBall.overAxis.name == "Arc Z")
                 {
-                    angles += dx;
-                    angles += dy;
+                    angles += dx-dy;
+                   
                     Axis = gumBall.transform.TransformDirection(Vector3.forward);
                 }
 
                 var p = Target.transform.TransformVector(px/Target.transform.localScale.x, py / Target.transform.localScale.y, pz / Target.transform.localScale.z);
 
                 _position += p;
-                _scale+=new Vector3(_scale.x*sx*0.3f,_scale.y*sy*0.3f,_scale.z*sz*0.3f);
+                _scale+=new Vector3(_scale.x*sx*0.1f,_scale.y*sy*0.1f,_scale.z*sz*0.1f);
 
-                
                 gumBall.transform.position =
                     Vector3.Lerp(gumBall.transform.position, _position, Time.deltaTime * _stiffness);
 
                 if (angles != 0f)
-                    gumBall.transform.RotateAround(gumBall.transform.position, Axis, angles*2f);
+                {
+                    float Agls = Mathf.LerpAngle(0f, angles, Time.deltaTime * _stiffness*5f);
+                    gumBall.transform.RotateAround(gumBall.transform.position, Axis, Agls * 3f);
+                }
+
+               
                    
                 Target.position = gumBall.transform.position;
                 Target.rotation = gumBall.transform.rotation;
