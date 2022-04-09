@@ -1,0 +1,11 @@
+{
+    "name": "com.zim.gumballhandles",
+    "displayName": "gumballHandles",
+    "version": "0.1.0",
+    "unity": "2019.5",
+    "keywords": ["handles", "runtime"],
+	"description": "gumball handle tools for in-game object transform operations",
+	"dependencies": {
+		
+	}
+}
